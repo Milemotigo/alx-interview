@@ -4,6 +4,10 @@ pascal triangle
 """
 
 def pascal_triangle(n):
+    """
+        get triangle
+    """
+
     if n <= 0:
         return []
 
