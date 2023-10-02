@@ -6,12 +6,6 @@
 def pascal_triangle(n):
      """
     This function creates a pascal triangle
-    
-    Args:
-        n (int): The first number.
-        
-    Returns:
-        int: triangle
     """
     if n <= 0:
         return []
