@@ -4,9 +4,16 @@
 """
 
 def pascal_triangle(n):
-     """
-    This function creates a pascal triangle
     """
+    This function creates a pascal triangle.
+    
+    Args:
+        n (int): The number of rows.
+        
+    Returns:
+        int: triangle.
+    """
+
     if n <= 0:
         return []
 
