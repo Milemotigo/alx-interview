@@ -1,24 +1,43 @@
+#!/usr/bin/python3
+'''A module for working with lockboxes.
+'''
+
+
 def canUnlockAll(boxes):
-    # Create a list to keep track of visited boxes
-    visited = [False] * len(boxes)
-    visited[0] = True  # Start with the first box which is unlocked
-    stack = [0]  # Initialize a stack with the first box
+    '''Checks if all the boxes in a list of boxes containing the keys
+    (indices) to other boxes can be unlocked given that the first
+    box is unlocked.
+    '''
+    n = len(boxes)
+    seen_boxes = set([0])
+    unseen_boxes = set(boxes[0]).difference(set([0]))
+    while len(unseen_boxes) > 0:
+        boxIdx = unseen_boxes.pop()
+        if not boxIdx or boxIdx >= n or boxIdx < 0:
+            continue
+        if boxIdx not in seen_boxes:
+            unseen_boxes = unseen_boxes.union(boxes[boxIdx])
+            seen_boxes.add(boxIdx)
+    return n == len(seen_boxes)
 
-    while stack:
-        current_box = stack.pop()
-        for key in boxes[current_box]:
-            if not visited[key]:
-                visited[key] = True
-                stack.append(key)
+# #!/usr/bin/python3
+# '''A module for working with lockboxes.
+# '''
 
-    # If all boxes are visited, return True; otherwise, return False
-    return all(visited)
 
-boxes = [[1], [2], [3], [4], []]
-print(canUnlockAll(boxes))
-
-boxes = [[1, 4, 6], [2], [0, 4, 1], [5, 6, 2], [3], [4, 1], [6]]
-print(canUnlockAll(boxes))
-
-boxes = [[1, 4], [2], [0, 4, 1], [3], [], [4, 1], [5, 6]]
-print(canUnlockAll(boxes))
+# def canUnlockAll(boxes):
+#     '''Checks if all the boxes in a list of boxes containing the keys
+#     (indices) to other boxes can be unlocked given that the first
+#     box is unlocked.
+#     '''
+#     is_visited = [False] * len(boxes)
+#     is_visited[0] = True
+#     stack = [0]
+#     while stack:
+#         current_box = stack.pop()
+#         for key in boxes[current_box]:
+#             # If the key can open an unvisited box
+#             if not is_visited[key]:
+#                 is_visited[key] = True
+#                 stack.append(key)
+#     return all(is_visited)
