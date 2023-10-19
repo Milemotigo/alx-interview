@@ -1,0 +1,1 @@
+Print final metrics after processing all lines
