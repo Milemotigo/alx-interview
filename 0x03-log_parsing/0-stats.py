@@ -15,7 +15,7 @@ try:
     for line in sys.stdin:
         line_count += 1
 
-        match = re.match(r'(\S+) - \[([^\]]+)\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)', line)
+        match = re.match(r'(\d+\.\d+\.\d+\.\d+) - \[([^\]]+)\] "GET /projects/260 HTTP/1\.1" (\d+) (\d+)', line)
         if match:
             ip, date, status_code, file_size = match.groups()
             status_code = int(status_code)
@@ -31,7 +31,3 @@ try:
 
 except KeyboardInterrupt:
     pass
-
-print(f"Total file size: {total_size}")
-for code in sorted(status_counts.keys()):
-    print(f"{code}: {status_counts[code]}")
