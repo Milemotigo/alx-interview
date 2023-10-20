@@ -9,7 +9,7 @@ import sys
 
 def display_metrics(total_size, status_code):
     """
-    Function that print the metrics
+        Function that print the metrics
     """
 
     print('File size: {}'.format(total_size))
