@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-This module contains a method that reads stdin line by line and
-computes metrics
+    This module contains a method that reads stdin line by line and
+    computes metrics
 """
 
 import sys
