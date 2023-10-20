@@ -1,46 +1,48 @@
 #!/usr/bin/python3
-"""log parsing"""
+"""
+This module contains a method that reads stdin line by line and
+computes metrics
+"""
+
 import sys
-import re
 
-def match(x: str) -> bool:
-    """Checks for input match"""
-    ip_match = r'\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3} - '
-    date_match = r'\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\.\d{6}\] '
-    stats_match = r'"GET /projects/260 HTTP/1\.1" \d{3} \d+'
-    pattern = ip_match + date_match + stats_match
-    return True if re.match(pattern, x) else False
 
-def log_parse() -> None:
-    """ A function that reads stdin line by line and computes metrics """
-    total_size = 0
-    status_codes = {
-        '200': 0, '301': 0, '400': 0, '401': 0,
-        '403': 0, '404': 0, '405': 0, '500': 0
-    }
-    
-    line_count = 0
+def display_metrics(total_size, status_code):
+    """
+    Function that print the metrics
+    """
 
-    try:
-        for line in sys.stdin:
-            if match(line):
-                a, b, c, d, e, f, g, status_code, f_size = line.split()
-                total_size += int(f_size)
-                if status_code in status_codes:
-                    status_codes[status_code] += 1
-                line_count += 1
-                if line_count % 10 == 0:
-                    print(f'File size: {total_size}')
-                    for key, val in status_codes.items():
-                        if val > 0:
-                            print(f"{key}: {val}")
+    print('File size: {}'.format(total_size))
+    for key, value in sorted(status_code.items()):
+        if value != 0:
+            print('{}: {}'.format(key, value))
 
-    except KeyboardInterrupt:
-        print(f'File size: {total_size}')
-        for key, val in status_codes.items():
-            if val > 0:
-                print(f"{key}: {val}")
-        exit(1)
 
 if __name__ == '__main__':
-    log_parse()
+    total_size = 0
+    status_code = {
+        '200': 0, '301': 0,
+        '400': 0, '401': 0,
+        '403': 0, '404': 0,
+        '405': 0, '500': 0
+    }
+
+    try:
+        i = 0
+        for line in sys.stdin:
+            args = line.split()
+            if len(args) > 6:
+                status = args[-2]
+                file_size = args[-1]
+                total_size += int(file_size)
+                if status in status_code:
+                    i += 1
+                    status_code[status] += 1
+                    if i % 10 == 0:
+                        display_metrics(total_size, status_code)
+
+    except KeyboardInterrupt:
+        display_metrics(total_size, status_code)
+        raise
+    else:
+        display_metrics(total_size, status_code)
