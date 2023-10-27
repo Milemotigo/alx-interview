@@ -1,30 +1,27 @@
 #!/usr/bin/python3
 """
- method that determines if a given data
- set represents a valid UTF-8 encoding
+module: 0-validate_utf8.py
 """
 
 
 def validUTF8(data):
     """
-    Return: True if data is a valid UTF-8 encoding,
-    else return False
+    method that determines if a given data
+    set represents a valid UTF-8 encoding.
     """
-    byte_reamining = 0
-    for byte in data:
-        if byte_reamining == 0:
-            if byte >> 7 == 0b0:
-                byte_reamining == 0
-            elif byte >> 5 == 0b110:
-                byte_reamining == 1
-            elif byte >> 4 == 0b1110:
-                byte_reamining == 2
-            elif byte >> 3 == 0b11110:
-                byte_reamining == 3
+    if len(data) == 1:
+        for i in data:
+            if i > 127:
+                return False
             else:
-                return False
+                return True
+    elif len(data) > 1:
+        if len(data) == 2 and data[0] > 223:
+            return False
+
         else:
-            if byte >> 6 != 0b10:
-                return False
-            byte_reamining -= 1
-    return byte_reamining == 0
+            new_data = data[1:]
+            for i in range(len(new_data)):
+                if new_data[i] > 191:
+                    return False
+    return True
