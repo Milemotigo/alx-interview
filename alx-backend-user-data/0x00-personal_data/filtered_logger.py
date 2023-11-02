@@ -6,7 +6,7 @@ import re
 
 def filter_datum(fields, redaction, message, separator):
     """
-    Filters a log message by obfuscating certain fields.
+    Filters a message by obfuscating certain fields.
 
     Args:
         fields: A list of strings representing all fields to obfuscate.
