@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+""" Solves the N queens problem
+"""
+
 import sys
 
 def nqueens(n):
