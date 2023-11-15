@@ -4,7 +4,8 @@
 
 def rotate_2d_matrix(matrix):
     '''
-    Do not return anything. The matrix must be edited in-place.
+    Do not return anything. The matrix must be edite
+    in-place.
     '''
     n = len(matrix)
 
