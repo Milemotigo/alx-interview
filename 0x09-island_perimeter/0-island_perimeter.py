@@ -1,4 +1,15 @@
+#!/usr/bin/python3
+'''
+0. Island Perimeter
+'''
+
 def island_perimeter(grid):
+    '''
+    grid is a list of list of integers:
+    0 represents water
+    1 represents land
+    Each cell is square, with a
+    '''
     perimeter = 0
 
     if not grid or not grid[0]:
