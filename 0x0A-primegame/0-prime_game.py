@@ -1,5 +1,16 @@
+#!/usr/bin/python3
+'''
+0. Prime Game
+'''
+
+
 def isWinner(x, nums):
+    '''
+    number of rounds and nums is an array of n
+    '''
     def is_prime(num):
+        '''nnmnbbhhhh
+        '''
         if num < 2:
             return False
         for i in range(2, int(num**0.5) + 1):
@@ -8,6 +19,9 @@ def isWinner(x, nums):
         return True
 
     def get_primes(n):
+        '''
+        fgghuyuuuuu
+        '''
         primes = []
         for i in range(2, n + 1):
             if is_prime(i):
@@ -15,6 +29,9 @@ def isWinner(x, nums):
         return primes
 
     def play_round(n):
+        '''
+        ghhjjjigff
+        '''
         primes = get_primes(n)
         maria_turn = True
 
